@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Y86 Simulator!</title>
+		<style type="text/css">
+			body {
+				font-family: "Liberation Sans",sans-serif;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Y86 Simulator! FAQ</h1>
+		<p>0. 您不需要任何安装, 您只需要将index.html在Chrome/Firefox/Safari中打开即可. 鉴于兼容IE的工作量太大, 甚至大过了整个Project的工程量, 因此我们不支持IE.</p>
+		<p>1. 将一个.yo文件拖拽至页面中的任意一个位置, 文件会被自动加载并初始化.</p>
+		<p>2. 你可以通过点击按钮来进行控制, 也可以通过上面标明的快捷键来进行控制.</p>
+		<p>3. 当一个寄存器被修改后, 寄存器监视区会对被修改的寄存器的显示部分进行闪烁提醒.</p>
+		<p>4. 在右下方的框中写上要监视的内存地址, 在mem_Val处会自动更新值</p>
+		<p>5. 最高支持1秒1000cycle的限速运行(不限速运行测试为约15K cycles/sec)</p>
+		<p>6. 对内存进行了分页, 页面大小为64K. 当尝试读取一个不存在的页面时会返回0, 写入一个不存在的页面时会尝试创建一个新的页面.默认页面数量限制为1024, 最高支持65536(浏览器一般会爆掉, 因为用了过多的内存)</p>
+		<p>7. 模块化编程, 将Register, Memory, CPU分别放入三个js文件中, 维护方便.</p>
+		<p>8. 界面简洁, 但是所需内容齐全.</p>
+		<p>9. 代码:<br />
+		constant.js 定义了程序中使用的常量, 使用了一个全局对象window.Constant<br />
+		kernel.js CPU, ALU以及Clock的实现, 使用了一个全局对象window.CPU<br />
+		loader.js 一些程序中调用函数的初始化, 加入了大量将数字数据转化为可读常量名/16进制数的函数.<br />
+		memory.js 内存管理器的实现, Int8Array实现页面, 使用了一个全局对象window.Memory<br />
+		registers.js 寄存器以及中间临时寄存器的实现, 使用了两个全局对象window.Registers和window.TempRegisters<br />
+		YOLoader.js .yo文件加载器, 内置语法分析和将程序段写入内存, 创建了一个全局函数window.YOLoad<br />
+		</p>
+		<p>10. 设计: <br />
+		(1) 页面GUI设计参考了Modern App的色块设计, 同时借鉴了bootstrap的12格思想, 进行了中部分栏的设计. <br />
+		(2) 前端特效使用了jQuery的animate, 并加上了一个jQuery的background-color的animate插件.<br />
+		(3) ALU中使用了闭包, 因此使用了大量闭包变量维护ALU的状态, 在ALU的生命周期结束后自动回收.<br />
+		(4) ALU中将大量的计算封装为函数, 根据ifun直接调用, 简洁方便, 调试差错轻松.<br />
+		(5) Memory使用了分页技术, 因此可以有效地管理不连续的内存, 同时根据地址分段, 逻辑清晰, 速度很快. <br />
+		(6) Register加入了一个由之前的Register复制一份的构造方法, 使得在CPU Clock Notify中, 可以直接newInput = new TempRegistter(output), 结构清晰, 代码清爽.<br />
+		(7) 函数中大量使用了匿名函数, 创建临时变量命名空间, 防止变量冲突.<br />
+		</p>
+		<p>11. 测试: 通过了CS:app Lab4中的海量测试, 同时和其他同学一起测试了更多的数据, 正确性和效率均有保障.</p>
+	</body>
+</html>

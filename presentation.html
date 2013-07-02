@@ -1,0 +1,128 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Y86 Simulator!</title>
+	<meta charset="utf-8" />
+	<script language="javascript" src="./js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/presentation.css" />
+</head>
+<body>
+<div class="page" id="page1" style="background-color: lightblue;">
+	<div id="page1-title" style="line-height: 400px; font-weight: bold; text-align: center; font-size: 72px; width: 100%; display: block;">Y86 Simulator!</div>
+	<div id="page1-author" style="line-height: 50px; text-align: right; font-size: 32px; width: 100%; display: block; font-weight: bold;">
+		<div style="margin-right: 50px; float: right">
+			<table border="0">
+				<tr><td>朱健维</td><td>11300240066</td></tr>
+				<tr><td>余一夫</td><td>预科</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="page" id="page2" style="background-color: lightseagreen">
+	<div id="page2-title" style="line-height: 150px; font-weight: bold; font-size: 48px;">Why using javascript?</div>
+	<div id="page2-content" style="height: 350px; width: 100%;">
+		<ul style="display: block;">
+			<li id="page2-content-leftImg" style="width: 50%; display: inline;  float: left;">
+				<div style="display: inline"> <img alt="jslinux" src="./img/jslinux.png" height="350" /></div>
+			</li>
+			<li id="page2-content-rightContent" style="width: 50%;  display: inline;  float: left; font-size: 24px;">
+				<div style="display: inline;">
+					<p>There is a very interesting project named <a href="http://bellard.org/jslinux/">JSLinux</a>. It simulates a 32bit x86-compatible CPU with javascipt,
+						with support of 8259 Programmble Interrupt Controller, 8254 Programmble Interrupt Timer, 16450 UART, Real Time Clock,
+						IDE interface and hard disk, without FPU.</p>
+					<p>With the simulated CPU, a busybox linux is compiled for the javascript VM, which has 16MB RAM and
+						16MB Hard Disk space. Since GCC is not suitable for such small memory, TCC, which is an ANSI/C compiler
+						writen in ANSI/C is provided.</p>
+				</div>
+			</li>
+		</ul>
+	</div>
+</div>
+<div class="page" id="page3" style="background-color: lightcyan;">
+	<div id="page3-title" style="line-height: 150px; font-weight: bold; font-size: 48px;">It's awesome.</div>
+	<div id="page3-content" style="height: 350px; width: 100%;">
+		<ul style="display: block;">
+			<li id="page3-content-leftContent" style="width: 50%; display: inline;  float: left; text-indent: 16px; font-size: 24px;">
+				<h1 style="text-align: center; display: block;">Easy</h1>
+				<p>Since javascript is a script language, no compiling is required. So, it's easy to programming in javascript.</p>
+				<p>No GUI programming is needed, browser has done for you, all you need is HTML and CSS.</p>
+				<p>Closures makes life easy to manage variables. A temporary "namespace" is created with closures, and destroyed when closures
+					is garbage collected.</p>
+			</li>
+			<li id="page3-content-rightContent" style="text-indent: 16px; width: 50%;  display: inline;  float: left; font-size: 24px;">
+				<h1 style="text-align: center; display: block;">Fast</h1>
+				<p>Many modern javascript engine, like V8 in Chrome, SpiderMonkey in Firefox,(not for IE), runs really fast, thanks to JIT,
+					a technology that compiles byte-code into native CPU code, so after the first time of execution, it can run as fast as C.
+					V8 can do 250 million number comparison in 1 second, and SpiderMonkey can do 600 million times.
+				</p>
+				<p>My Y86 simulator is not well implemented, but it can still done around 50 kilos of Y86 VM CPU cycle.</p>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="page4" class="page" style="background-color: lightgreen">
+	<div id="page4-title" style="line-height: 150px; font-weight: bold; font-size: 48px;">New technology.</div>
+	<div id="page4-content" style="height: 350px; width: 100%;">
+		<ul style="display: block;">
+			<li id="page4-content-leftContent" style="width: 50%; display: inline;  float: left; text-indent: 16px; font-size: 24px;">
+				<h1 style="text-align: center; display: block;">HTML5</h1>
+				<p>Thanks to File/FileReader in HTML5, it is possible to read local files with javascript, no needed to upload files to server.</p>
+				<p>Make life easier to write html pages and css stylesheets. Code less, do more.</p>
+				<p>Drag &amp; Drop makes easier to import your .yo file :)</p>
+			</li>
+			<li id="page4-content-rightContent" style="text-indent: 16px; width: 50%;  display: inline;  float: left; font-size: 24px;">
+				<h1 style="text-align: center; display: block;">WebGL</h1>
+				<p>Have thought of using WebGL, but it's a waste of talent of WebGL. Instead, I use jQuery.animate.</p>
+				<p>With GPU acceleration, you can play even larger game on web page without download and install.</p>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="page5" class="page" style="background-color: aliceblue;">
+	<div id="page5-title" style="line-height: 150px; font-weight: bold; font-size: 48px;">Implementation</div>
+	<div id="page5-content" style="height: 350px; width: 100%;">
+		<ul style="display: block;">
+			<li id="page5-content-leftContent" style="width: 50%; display: inline;  float: left; text-indent: 16px; font-size: 24px;">
+				<h1 style="text-align: center; display: block;">Memory</h1>
+				<p>Paged memory, like how it done in modern OSes.</p>
+				<p>Page size is 64K (16bit address).</p>
+				<p>Use javascript object to deal with address-data mapping.</p>
+			</li>
+			<li id="page5-content-rightContent" style="text-indent: 16px; width: 50%;  display: inline;  float: left; font-size: 24px;">
+				<h1 style="text-align: center; display: block;">Clock</h1>
+				<p>Single step / real clock. You can overclocking the CPU (it's difficult to break through the runtime,
+					javascript setInterval supports a minimal interval of 1ms, which can run about 5 ~ 10 cycles).</p>
+				<p>Use Array.indexOf to combine multiple if-statement.</p>
+			</li>
+		</ul>
+	</div>
+</div>
+<div id="page6" class="page" style="background-color: greenyellow">
+	<div id="page6-title" style="line-height: 768px; font-weight: bold; font-size: 192px; text-align: center;"><a href="./index.html">Try it out!</a></div>
+</div>
+<script language="javascript">
+	var page = 1;
+
+	function lastPage() {
+		if(page <= 1) return ;
+		-- page;
+		$('html body').animate({
+			scrollTop: $('#page' + page.toString()).offset().top
+		}, 2000);
+	}
+
+	function nextPage() {
+		if(page >= 6) return ;
+		++ page;
+		$('html body').animate({
+			scrollTop: $('#page' + page.toString()).offset().top
+		}, 2000);
+	}
+
+	$(document).keydown(function(e) {
+		if(e.keyCode == 38) lastPage(); // Up
+		else if(e.keyCode == 40) nextPage(); // Down
+	});
+</script>
+</body>
+</html>
